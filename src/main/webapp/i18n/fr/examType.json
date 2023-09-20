@@ -1,0 +1,10 @@
+{
+  "examApp": {
+    "ExamType": {
+      "null": "",
+      "KOREAN": "KOREAN",
+      "ENGLISH": "ENGLISH",
+      "KOREAN_HISTORY": "KOREAN_HISTORY"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "examApp": {
+    "quiz": {
+      "home": {
+        "title": "Quizzes",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Quiz",
+        "createOrEditLabel": "Créer ou éditer un Quiz",
+        "notFound": "Aucun Quiz trouvé"
+      },
+      "created": "Un nouveau Quiz a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Quiz avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Quiz avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Quiz {{ id }} ?"
+      },
+      "detail": {
+        "title": "Quiz"
+      },
+      "id": "ID",
+      "code": "Code",
+      "question": "Question",
+      "example": "Example",
+      "selections": "Selections",
+      "explain": "Explain",
+      "exam": "Exam"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "examApp": {
+    "license": {
+      "home": {
+        "title": "Licenses",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau License",
+        "createOrEditLabel": "Créer ou éditer un License",
+        "notFound": "Aucun License trouvé"
+      },
+      "created": "Un nouveau License a été créé avec l'identifiant {{ param }}",
+      "updated": "Le License avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le License avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le License {{ id }} ?"
+      },
+      "detail": {
+        "title": "License"
+      },
+      "id": "ID",
+      "title": "Title",
+      "exam": "Exam"
+    }
+  }
+}

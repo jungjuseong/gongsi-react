@@ -1,0 +1,59 @@
+application {
+    config {
+        baseName exam
+        applicationType monolith
+        authenticationType oauth2
+        packageName com.gongsi.exam
+        prodDatabaseType mysql
+        cacheProvider ehcache
+        buildTool maven
+        clientFramework react
+        nativeLanguage en
+        languages [en, fr]
+        testFrameworks [cypress]
+    }
+    entities *
+}
+
+
+enum ExamType {
+    KOREAN, ENGLISH, KOREAN_HISTORY
+}
+
+enum AnswerType {
+    Q1, Q2, Q3, Q4, NO_DECISION
+}
+
+entity License {
+    title String required
+}
+
+entity Exam {
+    title String required,
+    examType ExamType,
+    effectiveDate LocalDate required
+}
+
+entity Agency {
+    name String required
+}
+
+entity Quiz {
+    code String required,
+    question String required maxlength(1024),
+    example TextBlob,
+    selections String maxlength(1024),
+    // answer AnswerType required,
+}
+
+entity Explain {
+    answer AnswerType required,
+    description TextBlob
+}
+
+relationship OneToMany {
+    Exam to Quiz { exam(title) }
+    Agency to Exam { implementingAgency(name) }
+    License to Exam { license(title) }
+    Quiz {explain} to Explain { quiz(code) }
+}

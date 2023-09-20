@@ -1,0 +1,26 @@
+{
+  "examApp": {
+    "explain": {
+      "home": {
+        "title": "Explains",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Explain",
+        "createOrEditLabel": "Create or edit a Explain",
+        "notFound": "No Explains found"
+      },
+      "created": "A new Explain is created with identifier {{ param }}",
+      "updated": "A Explain is updated with identifier {{ param }}",
+      "deleted": "A Explain is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Explain {{ id }}?"
+      },
+      "detail": {
+        "title": "Explain"
+      },
+      "id": "ID",
+      "answer": "Answer",
+      "description": "Description",
+      "quiz": "Quiz"
+    }
+  }
+}
