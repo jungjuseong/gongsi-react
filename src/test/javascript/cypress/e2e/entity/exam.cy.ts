@@ -15,7 +15,7 @@ describe('Exam e2e test', () => {
   const examPageUrlPattern = new RegExp('/exam(\\?.*)?$');
   const username = Cypress.env('E2E_USERNAME') ?? 'user';
   const password = Cypress.env('E2E_PASSWORD') ?? 'user';
-  const examSample = { title: 'beneath strictly', effectiveDate: '2023-09-17' };
+  const examSample = { title: 'beneath strictly', date: '2023-09-17' };
 
   let exam;
 
@@ -162,11 +162,11 @@ describe('Exam e2e test', () => {
       cy.get(`[data-cy="title"]`).type('ack practice positively');
       cy.get(`[data-cy="title"]`).should('have.value', 'ack practice positively');
 
-      cy.get(`[data-cy="examType"]`).select('KOREAN_HISTORY');
+      cy.get(`[data-cy="subject"]`).select('KOREAN');
 
-      cy.get(`[data-cy="effectiveDate"]`).type('2023-09-17');
-      cy.get(`[data-cy="effectiveDate"]`).blur();
-      cy.get(`[data-cy="effectiveDate"]`).should('have.value', '2023-09-17');
+      cy.get(`[data-cy="date"]`).type('2023-09-17');
+      cy.get(`[data-cy="date"]`).blur();
+      cy.get(`[data-cy="date"]`).should('have.value', '2023-09-17');
 
       cy.get(entityCreateSaveButtonSelector).click();
 

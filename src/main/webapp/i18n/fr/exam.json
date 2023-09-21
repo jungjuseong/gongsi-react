@@ -19,10 +19,10 @@
       },
       "id": "ID",
       "title": "Title",
-      "examType": "Exam Type",
-      "effectiveDate": "Effective Date",
+      "subject": "Subject",
+      "date": "Date",
       "quiz": "Quiz",
-      "implementingAgency": "Implementing Agency",
+      "agency": "Agency",
       "license": "License"
     }
   }

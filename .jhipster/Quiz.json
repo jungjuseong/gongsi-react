@@ -1,0 +1,47 @@
+{
+  "applications": ["exam"],
+  "changelogDate": "20230918074229",
+  "entityTableName": "quiz",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "question",
+      "fieldType": "String",
+      "fieldValidateRules": ["required", "maxlength"],
+      "fieldValidateRulesMaxlength": "1024"
+    },
+    {
+      "fieldName": "example",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    },
+    {
+      "fieldName": "selections",
+      "fieldType": "String",
+      "fieldValidateRules": ["maxlength"],
+      "fieldValidateRulesMaxlength": "1024"
+    }
+  ],
+  "name": "Quiz",
+  "relationships": [
+    {
+      "otherEntityName": "explain",
+      "otherEntityRelationshipName": "quiz",
+      "relationshipName": "explain",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "exam",
+      "relationshipName": "exam",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

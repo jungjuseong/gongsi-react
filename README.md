@@ -2,6 +2,18 @@
 
 This application was generated using JHipster 8.0.0-beta.3, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v8.0.0-beta.3](https://www.jhipster.tech/documentation-archive/v8.0.0-beta.3).
 
+## file rename
+
+rename 's/^2022\.6\.18-example-(\d{2}).txt/$1.txt/s' *.txt
+
+## code push
+
+personal access token:
+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
+
+git remote remove origin
+git remote add origin https://jungjuseong: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@github.com/jungjuseong/gongsi-react.git
+git push origin main
 ## Project Structure
 
 Node is required for generation and recommended for development. `package.json` is always generated for a better development experience with prettier, commit hooks, scripts and so on.

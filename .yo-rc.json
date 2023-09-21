@@ -1,0 +1,26 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 0,
+    "applicationType": "monolith",
+    "authenticationType": "oauth2",
+    "baseName": "exam",
+    "buildTool": "maven",
+    "cacheProvider": "ehcache",
+    "clientFramework": "react",
+    "creationTimestamp": 1695170519271,
+    "devServerPort": 9060,
+    "entities": ["Exam", "Agency", "Quiz", "Explain", "License"],
+    "jhipsterVersion": "8.0.0-beta.3",
+    "languages": ["en", "fr"],
+    "lastLiquibaseTimestamp": 1695188991000,
+    "monorepository": true,
+    "nativeLanguage": "en",
+    "packageFolder": "com/gongsi/exam",
+    "packageName": "com.gongsi.exam",
+    "prodDatabaseType": "mysql",
+    "skipClient": false,
+    "skipCommitHook": true,
+    "skipUserManagement": true,
+    "testFrameworks": ["cypress"]
+  }
+}

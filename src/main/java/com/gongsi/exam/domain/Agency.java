@@ -29,9 +29,9 @@ public class Agency implements Serializable {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "implementingAgency")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "agency")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "quizzes", "implementingAgency", "license" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "quizzes", "agency", "license" }, allowSetters = true)
     private Set<Exam> exams = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
@@ -68,10 +68,10 @@ public class Agency implements Serializable {
 
     public void setExams(Set<Exam> exams) {
         if (this.exams != null) {
-            this.exams.forEach(i -> i.setImplementingAgency(null));
+            this.exams.forEach(i -> i.setAgency(null));
         }
         if (exams != null) {
-            exams.forEach(i -> i.setImplementingAgency(this));
+            exams.forEach(i -> i.setAgency(this));
         }
         this.exams = exams;
     }
@@ -83,13 +83,13 @@ public class Agency implements Serializable {
 
     public Agency addExam(Exam exam) {
         this.exams.add(exam);
-        exam.setImplementingAgency(this);
+        exam.setAgency(this);
         return this;
     }
 
     public Agency removeExam(Exam exam) {
         this.exams.remove(exam);
-        exam.setImplementingAgency(null);
+        exam.setAgency(null);
         return this;
     }
 

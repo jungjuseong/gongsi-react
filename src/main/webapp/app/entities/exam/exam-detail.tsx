@@ -39,23 +39,21 @@ export const ExamDetail = () => {
           </dt>
           <dd>{examEntity.title}</dd>
           <dt>
-            <span id="examType">
-              <Translate contentKey="examApp.exam.examType">Exam Type</Translate>
+            <span id="subject">
+              <Translate contentKey="examApp.exam.subject">Subject</Translate>
             </span>
           </dt>
-          <dd>{examEntity.examType}</dd>
+          <dd>{examEntity.subject}</dd>
           <dt>
-            <span id="effectiveDate">
-              <Translate contentKey="examApp.exam.effectiveDate">Effective Date</Translate>
+            <span id="date">
+              <Translate contentKey="examApp.exam.date">Date</Translate>
             </span>
           </dt>
-          <dd>
-            {examEntity.effectiveDate ? <TextFormat value={examEntity.effectiveDate} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}
-          </dd>
+          <dd>{examEntity.date ? <TextFormat value={examEntity.date} type="date" format={APP_LOCAL_DATE_FORMAT} /> : null}</dd>
           <dt>
-            <Translate contentKey="examApp.exam.implementingAgency">Implementing Agency</Translate>
+            <Translate contentKey="examApp.exam.agency">Agency</Translate>
           </dt>
-          <dd>{examEntity.implementingAgency ? examEntity.implementingAgency.name : ''}</dd>
+          <dd>{examEntity.agency ? examEntity.agency.name : ''}</dd>
           <dt>
             <Translate contentKey="examApp.exam.license">License</Translate>
           </dt>

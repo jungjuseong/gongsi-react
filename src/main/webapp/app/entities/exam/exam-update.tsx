@@ -13,7 +13,7 @@ import { getEntities as getAgencies } from 'app/entities/agency/agency.reducer';
 import { ILicense } from 'app/shared/model/license.model';
 import { getEntities as getLicenses } from 'app/entities/license/license.reducer';
 import { IExam } from 'app/shared/model/exam.model';
-import { ExamType } from 'app/shared/model/enumerations/exam-type.model';
+import { SubjectType } from 'app/shared/model/enumerations/subject-type.model';
 import { getEntity, updateEntity, createEntity, reset } from './exam.reducer';
 
 export const ExamUpdate = () => {
@@ -30,7 +30,7 @@ export const ExamUpdate = () => {
   const loading = useAppSelector(state => state.exam.loading);
   const updating = useAppSelector(state => state.exam.updating);
   const updateSuccess = useAppSelector(state => state.exam.updateSuccess);
-  const examTypeValues = Object.keys(ExamType);
+  const subjectTypeValues = Object.keys(SubjectType);
 
   const handleClose = () => {
     navigate('/exam');
@@ -57,7 +57,7 @@ export const ExamUpdate = () => {
     const entity = {
       ...examEntity,
       ...values,
-      implementingAgency: agencies.find(it => it.id.toString() === values.implementingAgency.toString()),
+      agency: agencies.find(it => it.id.toString() === values.agency.toString()),
       license: licenses.find(it => it.id.toString() === values.license.toString()),
     };
 
@@ -72,9 +72,9 @@ export const ExamUpdate = () => {
     isNew
       ? {}
       : {
-          examType: 'KOREAN',
+          subject: 'HISTORY',
           ...examEntity,
-          implementingAgency: examEntity?.implementingAgency?.id,
+          agency: examEntity?.agency?.id,
           license: examEntity?.license?.id,
         };
 
@@ -113,36 +113,24 @@ export const ExamUpdate = () => {
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField
-                label={translate('examApp.exam.examType')}
-                id="exam-examType"
-                name="examType"
-                data-cy="examType"
-                type="select"
-              >
-                {examTypeValues.map(examType => (
-                  <option value={examType} key={examType}>
-                    {translate('examApp.ExamType.' + examType)}
+              <ValidatedField label={translate('examApp.exam.subject')} id="exam-subject" name="subject" data-cy="subject" type="select">
+                {subjectTypeValues.map(subjectType => (
+                  <option value={subjectType} key={subjectType}>
+                    {translate('examApp.SubjectType.' + subjectType)}
                   </option>
                 ))}
               </ValidatedField>
               <ValidatedField
-                label={translate('examApp.exam.effectiveDate')}
-                id="exam-effectiveDate"
-                name="effectiveDate"
-                data-cy="effectiveDate"
+                label={translate('examApp.exam.date')}
+                id="exam-date"
+                name="date"
+                data-cy="date"
                 type="date"
                 validate={{
                   required: { value: true, message: translate('entity.validation.required') },
                 }}
               />
-              <ValidatedField
-                id="exam-implementingAgency"
-                name="implementingAgency"
-                data-cy="implementingAgency"
-                label={translate('examApp.exam.implementingAgency')}
-                type="select"
-              >
+              <ValidatedField id="exam-agency" name="agency" data-cy="agency" label={translate('examApp.exam.agency')} type="select">
                 <option value="" key="0" />
                 {agencies
                   ? agencies.map(otherEntity => (

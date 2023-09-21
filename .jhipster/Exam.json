@@ -1,0 +1,47 @@
+{
+  "applications": ["exam"],
+  "changelogDate": "20230918074029",
+  "entityTableName": "exam",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "subject",
+      "fieldType": "SubjectType",
+      "fieldValues": "HISTORY,ENGLISH,KOREAN"
+    },
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Exam",
+  "relationships": [
+    {
+      "otherEntityName": "quiz",
+      "otherEntityRelationshipName": "exam",
+      "relationshipName": "quiz",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "agency",
+      "relationshipName": "agency",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "license",
+      "relationshipName": "license",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

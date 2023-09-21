@@ -31,7 +31,7 @@ public class License implements Serializable {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "license")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(value = { "quizzes", "implementingAgency", "license" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "quizzes", "agency", "license" }, allowSetters = true)
     private Set<Exam> exams = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

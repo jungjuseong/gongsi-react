@@ -48,7 +48,7 @@ public class Quiz implements Serializable {
     private Set<Explain> explains = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties(value = { "quizzes", "implementingAgency", "license" }, allowSetters = true)
+    @JsonIgnoreProperties(value = { "quizzes", "agency", "license" }, allowSetters = true)
     private Exam exam;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here

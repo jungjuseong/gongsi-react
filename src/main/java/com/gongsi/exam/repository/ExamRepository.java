@@ -27,14 +27,14 @@ public interface ExamRepository extends JpaRepository<Exam, Long> {
     }
 
     @Query(
-        value = "select exam from Exam exam left join fetch exam.implementingAgency left join fetch exam.license",
+        value = "select exam from Exam exam left join fetch exam.agency left join fetch exam.license",
         countQuery = "select count(exam) from Exam exam"
     )
     Page<Exam> findAllWithToOneRelationships(Pageable pageable);
 
-    @Query("select exam from Exam exam left join fetch exam.implementingAgency left join fetch exam.license")
+    @Query("select exam from Exam exam left join fetch exam.agency left join fetch exam.license")
     List<Exam> findAllWithToOneRelationships();
 
-    @Query("select exam from Exam exam left join fetch exam.implementingAgency left join fetch exam.license where exam.id =:id")
+    @Query("select exam from Exam exam left join fetch exam.agency left join fetch exam.license where exam.id =:id")
     Optional<Exam> findOneWithToOneRelationships(@Param("id") Long id);
 }

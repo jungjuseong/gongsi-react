@@ -91,16 +91,15 @@ export const Exam = () => {
                 <th className="hand" onClick={sort('title')}>
                   <Translate contentKey="examApp.exam.title">Title</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('title')} />
                 </th>
-                <th className="hand" onClick={sort('examType')}>
-                  <Translate contentKey="examApp.exam.examType">Exam Type</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('examType')} />
+                <th className="hand" onClick={sort('subject')}>
+                  <Translate contentKey="examApp.exam.subject">Subject</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('subject')} />
                 </th>
-                <th className="hand" onClick={sort('effectiveDate')}>
-                  <Translate contentKey="examApp.exam.effectiveDate">Effective Date</Translate>{' '}
-                  <FontAwesomeIcon icon={getSortIconByFieldName('effectiveDate')} />
+                <th className="hand" onClick={sort('date')}>
+                  <Translate contentKey="examApp.exam.date">Date</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('date')} />
                 </th>
                 <th>
-                  <Translate contentKey="examApp.exam.implementingAgency">Implementing Agency</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="examApp.exam.agency">Agency</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="examApp.exam.license">License</Translate> <FontAwesomeIcon icon="sort" />
@@ -118,18 +117,10 @@ export const Exam = () => {
                   </td>
                   <td>{exam.title}</td>
                   <td>
-                    <Translate contentKey={`examApp.ExamType.${exam.examType}`} />
+                    <Translate contentKey={`examApp.SubjectType.${exam.subject}`} />
                   </td>
-                  <td>
-                    {exam.effectiveDate ? <TextFormat type="date" value={exam.effectiveDate} format={APP_LOCAL_DATE_FORMAT} /> : null}
-                  </td>
-                  <td>
-                    {exam.implementingAgency ? (
-                      <Link to={`/agency/${exam.implementingAgency.id}`}>{exam.implementingAgency.name}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
+                  <td>{exam.date ? <TextFormat type="date" value={exam.date} format={APP_LOCAL_DATE_FORMAT} /> : null}</td>
+                  <td>{exam.agency ? <Link to={`/agency/${exam.agency.id}`}>{exam.agency.name}</Link> : ''}</td>
                   <td>{exam.license ? <Link to={`/license/${exam.license.id}`}>{exam.license.title}</Link> : ''}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">

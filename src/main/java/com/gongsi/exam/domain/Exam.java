@@ -1,7 +1,7 @@
 package com.gongsi.exam.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.gongsi.exam.domain.enumeration.ExamType;
+import com.gongsi.exam.domain.enumeration.SubjectType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.io.Serializable;
@@ -32,12 +32,12 @@ public class Exam implements Serializable {
     private String title;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "exam_type")
-    private ExamType examType;
+    @Column(name = "subject")
+    private SubjectType subject;
 
     @NotNull
-    @Column(name = "effective_date", nullable = false)
-    private LocalDate effectiveDate;
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "exam")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -46,7 +46,7 @@ public class Exam implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "exams" }, allowSetters = true)
-    private Agency implementingAgency;
+    private Agency agency;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties(value = { "exams" }, allowSetters = true)
@@ -80,30 +80,30 @@ public class Exam implements Serializable {
         this.title = title;
     }
 
-    public ExamType getExamType() {
-        return this.examType;
+    public SubjectType getSubject() {
+        return this.subject;
     }
 
-    public Exam examType(ExamType examType) {
-        this.setExamType(examType);
+    public Exam subject(SubjectType subject) {
+        this.setSubject(subject);
         return this;
     }
 
-    public void setExamType(ExamType examType) {
-        this.examType = examType;
+    public void setSubject(SubjectType subject) {
+        this.subject = subject;
     }
 
-    public LocalDate getEffectiveDate() {
-        return this.effectiveDate;
+    public LocalDate getDate() {
+        return this.date;
     }
 
-    public Exam effectiveDate(LocalDate effectiveDate) {
-        this.setEffectiveDate(effectiveDate);
+    public Exam date(LocalDate date) {
+        this.setDate(date);
         return this;
     }
 
-    public void setEffectiveDate(LocalDate effectiveDate) {
-        this.effectiveDate = effectiveDate;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public Set<Quiz> getQuizzes() {
@@ -137,16 +137,16 @@ public class Exam implements Serializable {
         return this;
     }
 
-    public Agency getImplementingAgency() {
-        return this.implementingAgency;
+    public Agency getAgency() {
+        return this.agency;
     }
 
-    public void setImplementingAgency(Agency agency) {
-        this.implementingAgency = agency;
+    public void setAgency(Agency agency) {
+        this.agency = agency;
     }
 
-    public Exam implementingAgency(Agency agency) {
-        this.setImplementingAgency(agency);
+    public Exam agency(Agency agency) {
+        this.setAgency(agency);
         return this;
     }
 
@@ -188,8 +188,8 @@ public class Exam implements Serializable {
         return "Exam{" +
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
-            ", examType='" + getExamType() + "'" +
-            ", effectiveDate='" + getEffectiveDate() + "'" +
+            ", subject='" + getSubject() + "'" +
+            ", date='" + getDate() + "'" +
             "}";
     }
 }

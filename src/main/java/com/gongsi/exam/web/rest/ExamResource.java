@@ -126,11 +126,11 @@ public class ExamResource {
                 if (exam.getTitle() != null) {
                     existingExam.setTitle(exam.getTitle());
                 }
-                if (exam.getExamType() != null) {
-                    existingExam.setExamType(exam.getExamType());
+                if (exam.getSubject() != null) {
+                    existingExam.setSubject(exam.getSubject());
                 }
-                if (exam.getEffectiveDate() != null) {
-                    existingExam.setEffectiveDate(exam.getEffectiveDate());
+                if (exam.getDate() != null) {
+                    existingExam.setDate(exam.getDate());
                 }
 
                 return existingExam;

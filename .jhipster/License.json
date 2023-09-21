@@ -1,0 +1,23 @@
+{
+  "applications": ["exam"],
+  "changelogDate": "20230920054951",
+  "entityTableName": "license",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "License",
+  "relationships": [
+    {
+      "otherEntityName": "exam",
+      "otherEntityRelationshipName": "license",
+      "relationshipName": "exam",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

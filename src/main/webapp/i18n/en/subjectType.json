@@ -1,0 +1,10 @@
+{
+  "examApp": {
+    "SubjectType": {
+      "null": "",
+      "HISTORY": "HISTORY",
+      "ENGLISH": "ENGLISH",
+      "KOREAN": "KOREAN"
+    }
+  }
+}

@@ -9,7 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.gongsi.exam.IntegrationTest;
 import com.gongsi.exam.domain.Exam;
-import com.gongsi.exam.domain.enumeration.ExamType;
+import com.gongsi.exam.domain.enumeration.SubjectType;
 import com.gongsi.exam.repository.ExamRepository;
 import jakarta.persistence.EntityManager;
 import java.time.LocalDate;
@@ -44,11 +44,11 @@ class ExamResourceIT {
     private static final String DEFAULT_TITLE = "AAAAAAAAAA";
     private static final String UPDATED_TITLE = "BBBBBBBBBB";
 
-    private static final ExamType DEFAULT_EXAM_TYPE = ExamType.KOREAN;
-    private static final ExamType UPDATED_EXAM_TYPE = ExamType.ENGLISH;
+    private static final SubjectType DEFAULT_SUBJECT = SubjectType.HISTORY;
+    private static final SubjectType UPDATED_SUBJECT = SubjectType.ENGLISH;
 
-    private static final LocalDate DEFAULT_EFFECTIVE_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_EFFECTIVE_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
 
     private static final String ENTITY_API_URL = "/api/exams";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
@@ -77,7 +77,7 @@ class ExamResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Exam createEntity(EntityManager em) {
-        Exam exam = new Exam().title(DEFAULT_TITLE).examType(DEFAULT_EXAM_TYPE).effectiveDate(DEFAULT_EFFECTIVE_DATE);
+        Exam exam = new Exam().title(DEFAULT_TITLE).subject(DEFAULT_SUBJECT).date(DEFAULT_DATE);
         return exam;
     }
 
@@ -88,7 +88,7 @@ class ExamResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Exam createUpdatedEntity(EntityManager em) {
-        Exam exam = new Exam().title(UPDATED_TITLE).examType(UPDATED_EXAM_TYPE).effectiveDate(UPDATED_EFFECTIVE_DATE);
+        Exam exam = new Exam().title(UPDATED_TITLE).subject(UPDATED_SUBJECT).date(UPDATED_DATE);
         return exam;
     }
 
@@ -113,8 +113,8 @@ class ExamResourceIT {
         assertThat(examList).hasSize(databaseSizeBeforeCreate + 1);
         Exam testExam = examList.get(examList.size() - 1);
         assertThat(testExam.getTitle()).isEqualTo(DEFAULT_TITLE);
-        assertThat(testExam.getExamType()).isEqualTo(DEFAULT_EXAM_TYPE);
-        assertThat(testExam.getEffectiveDate()).isEqualTo(DEFAULT_EFFECTIVE_DATE);
+        assertThat(testExam.getSubject()).isEqualTo(DEFAULT_SUBJECT);
+        assertThat(testExam.getDate()).isEqualTo(DEFAULT_DATE);
     }
 
     @Test
@@ -158,10 +158,10 @@ class ExamResourceIT {
 
     @Test
     @Transactional
-    void checkEffectiveDateIsRequired() throws Exception {
+    void checkDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = examRepository.findAll().size();
         // set the field null
-        exam.setEffectiveDate(null);
+        exam.setDate(null);
 
         // Create the Exam, which fails.
 
@@ -188,8 +188,8 @@ class ExamResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(exam.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
-            .andExpect(jsonPath("$.[*].examType").value(hasItem(DEFAULT_EXAM_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].effectiveDate").value(hasItem(DEFAULT_EFFECTIVE_DATE.toString())));
+            .andExpect(jsonPath("$.[*].subject").value(hasItem(DEFAULT_SUBJECT.toString())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())));
     }
 
     @SuppressWarnings({ "unchecked" })
@@ -222,8 +222,8 @@ class ExamResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(exam.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
-            .andExpect(jsonPath("$.examType").value(DEFAULT_EXAM_TYPE.toString()))
-            .andExpect(jsonPath("$.effectiveDate").value(DEFAULT_EFFECTIVE_DATE.toString()));
+            .andExpect(jsonPath("$.subject").value(DEFAULT_SUBJECT.toString()))
+            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()));
     }
 
     @Test
@@ -245,7 +245,7 @@ class ExamResourceIT {
         Exam updatedExam = examRepository.findById(exam.getId()).orElseThrow();
         // Disconnect from session so that the updates on updatedExam are not directly saved in db
         em.detach(updatedExam);
-        updatedExam.title(UPDATED_TITLE).examType(UPDATED_EXAM_TYPE).effectiveDate(UPDATED_EFFECTIVE_DATE);
+        updatedExam.title(UPDATED_TITLE).subject(UPDATED_SUBJECT).date(UPDATED_DATE);
 
         restExamMockMvc
             .perform(
@@ -261,8 +261,8 @@ class ExamResourceIT {
         assertThat(examList).hasSize(databaseSizeBeforeUpdate);
         Exam testExam = examList.get(examList.size() - 1);
         assertThat(testExam.getTitle()).isEqualTo(UPDATED_TITLE);
-        assertThat(testExam.getExamType()).isEqualTo(UPDATED_EXAM_TYPE);
-        assertThat(testExam.getEffectiveDate()).isEqualTo(UPDATED_EFFECTIVE_DATE);
+        assertThat(testExam.getSubject()).isEqualTo(UPDATED_SUBJECT);
+        assertThat(testExam.getDate()).isEqualTo(UPDATED_DATE);
     }
 
     @Test
@@ -337,7 +337,7 @@ class ExamResourceIT {
         Exam partialUpdatedExam = new Exam();
         partialUpdatedExam.setId(exam.getId());
 
-        partialUpdatedExam.title(UPDATED_TITLE).examType(UPDATED_EXAM_TYPE).effectiveDate(UPDATED_EFFECTIVE_DATE);
+        partialUpdatedExam.title(UPDATED_TITLE).subject(UPDATED_SUBJECT).date(UPDATED_DATE);
 
         restExamMockMvc
             .perform(
@@ -353,8 +353,8 @@ class ExamResourceIT {
         assertThat(examList).hasSize(databaseSizeBeforeUpdate);
         Exam testExam = examList.get(examList.size() - 1);
         assertThat(testExam.getTitle()).isEqualTo(UPDATED_TITLE);
-        assertThat(testExam.getExamType()).isEqualTo(UPDATED_EXAM_TYPE);
-        assertThat(testExam.getEffectiveDate()).isEqualTo(UPDATED_EFFECTIVE_DATE);
+        assertThat(testExam.getSubject()).isEqualTo(UPDATED_SUBJECT);
+        assertThat(testExam.getDate()).isEqualTo(UPDATED_DATE);
     }
 
     @Test
@@ -369,7 +369,7 @@ class ExamResourceIT {
         Exam partialUpdatedExam = new Exam();
         partialUpdatedExam.setId(exam.getId());
 
-        partialUpdatedExam.title(UPDATED_TITLE).examType(UPDATED_EXAM_TYPE).effectiveDate(UPDATED_EFFECTIVE_DATE);
+        partialUpdatedExam.title(UPDATED_TITLE).subject(UPDATED_SUBJECT).date(UPDATED_DATE);
 
         restExamMockMvc
             .perform(
@@ -385,8 +385,8 @@ class ExamResourceIT {
         assertThat(examList).hasSize(databaseSizeBeforeUpdate);
         Exam testExam = examList.get(examList.size() - 1);
         assertThat(testExam.getTitle()).isEqualTo(UPDATED_TITLE);
-        assertThat(testExam.getExamType()).isEqualTo(UPDATED_EXAM_TYPE);
-        assertThat(testExam.getEffectiveDate()).isEqualTo(UPDATED_EFFECTIVE_DATE);
+        assertThat(testExam.getSubject()).isEqualTo(UPDATED_SUBJECT);
+        assertThat(testExam.getDate()).isEqualTo(UPDATED_DATE);
     }
 
     @Test

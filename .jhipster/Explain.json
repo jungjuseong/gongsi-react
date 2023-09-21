@@ -1,0 +1,30 @@
+{
+  "applications": ["exam"],
+  "changelogDate": "20230920004159",
+  "entityTableName": "jhi_explain",
+  "fields": [
+    {
+      "fieldName": "answer",
+      "fieldType": "AnswerType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "Q1,Q2,Q3,Q4,NO_DECISION"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "text"
+    }
+  ],
+  "name": "Explain",
+  "relationships": [
+    {
+      "otherEntityField": "code",
+      "otherEntityName": "quiz",
+      "otherEntityRelationshipName": "explain",
+      "relationshipName": "quiz",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

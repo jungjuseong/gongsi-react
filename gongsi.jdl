@@ -16,8 +16,8 @@ application {
 }
 
 
-enum ExamType {
-    KOREAN, ENGLISH, KOREAN_HISTORY
+enum SubjectType {
+    HISTORY, ENGLISH, KOREAN
 }
 
 enum AnswerType {
@@ -30,8 +30,8 @@ entity License {
 
 entity Exam {
     title String required,
-    examType ExamType,
-    effectiveDate LocalDate required
+    subject SubjectType,
+    date LocalDate required
 }
 
 entity Agency {
@@ -53,7 +53,7 @@ entity Explain {
 
 relationship OneToMany {
     Exam to Quiz { exam(title) }
-    Agency to Exam { implementingAgency(name) }
+    Agency to Exam { agency(name) }
     License to Exam { license(title) }
     Quiz {explain} to Explain { quiz(code) }
 }
